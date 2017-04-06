@@ -8,8 +8,10 @@
 
 #import "Download.h"
 #import "SSZipArchive.h"
+
 @implementation Download
-+(Download*)shareInstance
+
++ (Download*)shareInstance
 {
     
     static Download *download = nil;
@@ -22,11 +24,11 @@
     
     
 }
--(void)unzipFileAtPath:(NSString *)path toDestination:(NSString *)destination{
+- (void)unzipFileAtPath:(NSString *)path toDestination:(NSString *)destination{
     
     [SSZipArchive unzipFileAtPath:path toDestination:destination overwrite:YES password:nil error:nil delegate:nil];
 }
--(void)downloadWithUrl:(NSString*)url{
+- (void)downloadWithUrlString:(NSString *)urlString {
     //本地路径头部
     NSString * headerPath =  [NSHomeDirectory() stringByAppendingString: @"/Library/Caches/HTML/"];
     //文件管理对象
@@ -36,13 +38,14 @@
         [manager createDirectoryAtPath:headerPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:url] completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         //判断是否请求成功
         if (!error) {
             NSString *fullPath = [headerPath stringByAppendingString:response.suggestedFilename];
             if ([manager fileExistsAtPath:fullPath]) {
                 [manager removeItemAtPath:fullPath error:nil];
             }
+            //剪切到指定位置
             [manager moveItemAtURL:location toURL:[NSURL URLWithString:fullPath] error:nil];
             [self unzipFileAtPath:fullPath toDestination:headerPath];
 
@@ -52,7 +55,7 @@
     [downloadTask resume];
 }
 
--(NSURL *)fileUrlWithUrlString:(NSString *)urlString{
+- (NSURL *)fileUrlWithUrlString:(NSString *)urlString{
     //本地路径头部
     NSString * headerPath =  [NSHomeDirectory() stringByAppendingString: @"/Library/Caches/HTML/"];
     //文件管理者

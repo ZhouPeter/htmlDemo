@@ -16,6 +16,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    //注册FilteredProtocol
     [NSURLProtocol registerClass:[FilteredProtocol class]];
     return YES;
 }

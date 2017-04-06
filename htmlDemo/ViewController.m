@@ -15,18 +15,21 @@
 
 @implementation ViewController
 - (IBAction)download:(UIButton *)sender {
-    [[Download shareInstance] downloadWithUrl:@"www.baidu.com"];
+    [[Download shareInstance] downloadWithUrlString:@"www.baidu.com"];
     NSString * headerPath =  [NSHomeDirectory() stringByAppendingString: @"/Library/Caches/HTML/"];
     [[Download shareInstance] unzipFileAtPath:[headerPath stringByAppendingString:@"baidu.zip"] toDestination:headerPath];
 }
 - (IBAction)loadWebView:(UIButton *)sender {
-    NSURL *url = [NSURL URLWithString:@"https://www.baidu.com"];
-    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
-    [_webView loadRequest: request];
+    [self loadWebView];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+- (void)loadWebView{
+    NSURL *url = [NSURL URLWithString:@"https://www.baidu.com"];
+    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
+    [_webView loadRequest: request];
 }
 
 
