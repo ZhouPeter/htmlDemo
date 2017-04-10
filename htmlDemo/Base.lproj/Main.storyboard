@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qEp-8Y-UdP">
-                                <rect key="frame" x="0.0" y="20" width="187.5" height="100"/>
+                                <rect key="frame" x="0.0" y="20" width="94" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="69o-k7-ETc"/>
                                 </constraints>
@@ -33,8 +33,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXa-CV-ZpP">
-                                <rect key="frame" x="187.5" y="20" width="187.5" height="100"/>
-                                <state key="normal" title="webView"/>
+                                <rect key="frame" x="281.5" y="20" width="93.5" height="100"/>
+                                <state key="normal" title="加载"/>
                                 <connections>
                                     <action selector="loadWebView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2lj-Dr-hc0"/>
                                 </connections>
@@ -43,18 +43,40 @@
                                 <rect key="frame" x="0.0" y="120" width="375" height="547"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljz-IL-MDX">
+                                <rect key="frame" x="94" y="20" width="93.5" height="100"/>
+                                <state key="normal" title="版本更新"/>
+                                <connections>
+                                    <action selector="versionCheck:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SNv-OJ-0Or"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLM-yk-v0R">
+                                <rect key="frame" x="187.5" y="20" width="93.5" height="100"/>
+                                <state key="normal" title="清除"/>
+                                <connections>
+                                    <action selector="clean:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fDi-zB-LB3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="5Ti-er-wTL" firstAttribute="top" secondItem="FXa-CV-ZpP" secondAttribute="bottom" id="0iB-eo-f9U"/>
+                            <constraint firstItem="MLM-yk-v0R" firstAttribute="width" secondItem="ljz-IL-MDX" secondAttribute="width" id="1yU-df-jkH"/>
                             <constraint firstItem="FXa-CV-ZpP" firstAttribute="height" secondItem="qEp-8Y-UdP" secondAttribute="height" id="2NN-vA-ahm"/>
+                            <constraint firstItem="5Ti-er-wTL" firstAttribute="top" secondItem="MLM-yk-v0R" secondAttribute="bottom" id="4is-0E-bBg"/>
                             <constraint firstItem="5Ti-er-wTL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EJo-8e-iug"/>
+                            <constraint firstItem="ljz-IL-MDX" firstAttribute="height" secondItem="qEp-8Y-UdP" secondAttribute="height" id="JtP-5n-eRx"/>
+                            <constraint firstItem="5Ti-er-wTL" firstAttribute="top" secondItem="ljz-IL-MDX" secondAttribute="bottom" id="KeC-qw-u4k"/>
+                            <constraint firstItem="MLM-yk-v0R" firstAttribute="leading" secondItem="ljz-IL-MDX" secondAttribute="trailing" id="O07-Rn-K75"/>
                             <constraint firstItem="qEp-8Y-UdP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Utf-xG-clo"/>
                             <constraint firstAttribute="trailing" secondItem="5Ti-er-wTL" secondAttribute="trailing" id="VkT-HU-5Q8"/>
                             <constraint firstItem="FXa-CV-ZpP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Wam-2Q-M04"/>
+                            <constraint firstItem="MLM-yk-v0R" firstAttribute="height" secondItem="ljz-IL-MDX" secondAttribute="height" id="aLZ-Gz-1tm"/>
+                            <constraint firstItem="ljz-IL-MDX" firstAttribute="width" secondItem="qEp-8Y-UdP" secondAttribute="width" id="gRb-Gv-UjG"/>
                             <constraint firstItem="FXa-CV-ZpP" firstAttribute="width" secondItem="qEp-8Y-UdP" secondAttribute="width" id="hyw-uq-Z78"/>
-                            <constraint firstItem="qEp-8Y-UdP" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="jxG-bI-CQk"/>
+                            <constraint firstItem="qEp-8Y-UdP" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="1:4" id="jxG-bI-CQk"/>
                             <constraint firstAttribute="trailing" secondItem="FXa-CV-ZpP" secondAttribute="trailing" id="l2b-9I-Knj"/>
+                            <constraint firstItem="ljz-IL-MDX" firstAttribute="leading" secondItem="qEp-8Y-UdP" secondAttribute="trailing" id="y3E-qf-rSZ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5Ti-er-wTL" secondAttribute="bottom" id="z7E-qm-7aB"/>
                             <constraint firstItem="qEp-8Y-UdP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="zha-5Y-MIe"/>
                         </constraints>

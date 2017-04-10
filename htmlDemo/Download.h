@@ -17,7 +17,11 @@
  */
 +(Download*)shareInstance;
 
-- (void)downloadWithUrlString:(NSString*)urlString;
+- (void)downloadWithUrlString:(NSString*)urlString forceUpdate:(BOOL) forceUpdate;
+
+
+
+- (void)cleanHtml;
 /**
  返回新的url
 

@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "Download.h"
+#import "DataTool.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
@@ -15,19 +16,45 @@
 
 @implementation ViewController
 - (IBAction)download:(UIButton *)sender {
-    [[Download shareInstance] downloadWithUrlString:@"www.baidu.com"];
-    NSString * headerPath =  [NSHomeDirectory() stringByAppendingString: @"/Library/Caches/HTML/"];
-    [[Download shareInstance] unzipFileAtPath:[headerPath stringByAppendingString:@"baidu.zip"] toDestination:headerPath];
+    [[Download shareInstance] downloadWithUrlString:@"https://ttgcdn.tatagou.com.cn/h5/20170406-AAAAAA.zip" forceUpdate:NO];
+
 }
+
+- (IBAction)versionCheck:(UIButton *)sender {
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSDictionary *parameters = @{ @"code" : [def valueForKey:@"versionCode"] };
+    [DataTool getDataWithUrl:@"https://testapi.tatagou.com.cn/v2/packageInfo" parameters:parameters success:^(NSDictionary *data) {
+        if ([data[@"code"] integerValue] == 200) {
+            if ([data[@"data"][@"versionCode"] integerValue] > [[def valueForKey:@"versionCode" ] integerValue]) {
+                [[Download shareInstance] downloadWithUrlString:data[@"data"][@"versionUrl"] forceUpdate:data[@"data"][@"forceUpdate"]];
+            }
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+- (IBAction)clean:(UIButton *)sender {
+    [[Download shareInstance] cleanHtml];
+}
+
 - (IBAction)loadWebView:(UIButton *)sender {
     [self loadWebView];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    [def setInteger:100 forKey:@"versionCode"];
+    [def synchronize];
+    
 }
+
+
 - (void)loadWebView{
-    NSURL *url = [NSURL URLWithString:@"https://www.baidu.com"];
+    NSString *urlString = @"https://ttgcdn.tatagou.com.cn/h5/index.html";
+    NSURL *url = [[Download shareInstance] fileUrlWithUrlString:urlString];
+    //NSURL *url = [[NSURL alloc]initWithString:urlString];
     NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
     [_webView loadRequest: request];
 }
